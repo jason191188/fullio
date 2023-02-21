@@ -1,0 +1,100 @@
+.container-wave {
+    position: absolute;
+    bottom: 0;
+}
+.wave-container-A {
+    position: relative;
+    width: 100vw;
+    height: 150px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    overflow: hidden;
+    z-index: 100;
+}
+/* .login-wave {
+    height: 120vh;
+    transition: 1s;
+    z-index: 4000;
+} */
+.login-wave {
+    animation: login 0.8s both cubic-bezier(1, -0.51, 1, 1);
+    z-index: 4000;
+}
+@keyframes login {
+    0% {
+    }
+    20% {
+        height: 150px;
+        transform: translateY(100px);
+    }
+    100% {
+        height: 120vh;
+    }
+}
+
+.wave-top {
+    width: 100vw;
+    height: 100px;
+}
+.wave-bottom {
+    position: relative;
+    width: 100vw;
+    height: 120vh;
+    background-color: #5daece;
+}
+.wave-AA {
+    position: absolute;
+    width: 100vw;
+    height: 100px;
+    background-image: url(./image/pWave.png);
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+    animation: waveA 3s both linear;
+    animation-iteration-count: infinite;
+    opacity: 0.8;
+}
+@keyframes waveA {
+    0% {
+        background-position-x: 100vw;
+    }
+    100% {
+        background-position-x: 0px;
+    }
+}
+.wave-BB {
+    position: absolute;
+    width: 100vw;
+    height: 100px;
+    background-image: url(./image/apWave.png);
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+    animation: waveB 2s both linear;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+}
+@keyframes waveB {
+    0% {
+        background-position-x: 0px;
+    }
+    100% {
+        background-position-x: 100vw;
+    }
+}
+.wave-CC {
+    position: absolute;
+    width: 100vw;
+    height: 100px;
+    background-image: url(./image/apWave.png);
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+    animation: waveC 3.3s both linear;
+    animation-iteration-count: infinite;
+    opacity: 1;
+}
+@keyframes waveC {
+    0% {
+        background-position-x: 0px;
+    }
+    100% {
+        background-position-x: 100vw;
+    }
+}

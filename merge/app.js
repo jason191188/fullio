@@ -15,11 +15,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieparser());
-app.use(cors({
-  origin : 'http://43.200.9.209:3000',
-  methods : ['GET', 'POST'],
-  credentials : true,
-}))
+app.use(cors());
 
 app.post('/login', login);
 app.get('/accesstoken', accessToken);
@@ -29,3 +25,8 @@ app.post('/logout', logout);
 
 
 module.exports = app;
+// {
+//   origin : 'http://43.200.9.209:3000',
+//   methods : ['GET', 'POST'],
+//   credentials : true,
+// }

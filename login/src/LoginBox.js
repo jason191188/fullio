@@ -87,7 +87,7 @@ function LoginBox() {
         //     setCancelImgMovePw(2);
         // }
         
-        fetch("http://localhost:8000/login", {
+        fetch("http://43.200.9.209/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

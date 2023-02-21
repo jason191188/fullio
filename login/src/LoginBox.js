@@ -86,7 +86,7 @@ function LoginBox() {
         //     setFailLoginPw('fail-login');
         //     setCancelImgMovePw(2);
         // }
-        
+        //수정
         fetch("http://43.200.9.209:8000/login", {
           method: "POST",
           headers: {

@@ -16,7 +16,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieparser());
 app.use(cors({
-  origin : 'http://localhost:80',
+  origin : 'http://localhost',
   methods : ['GET', 'POST'],
   credentials : true,
 }))

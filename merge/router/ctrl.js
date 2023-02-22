@@ -15,7 +15,7 @@ const login = (req, res) => {
     });
   }else{
     try {
-      /* //access token 발급
+       //access token 발급
        const accessToken = jwt.sign({
         id : userInfo.id,
         user : userInfo.user,
@@ -44,7 +44,7 @@ const login = (req, res) => {
       res.cookie("refreshToken",refreshToken, {
         secure : false,
         httpOnly : true,
-      });*/
+      });
 
       res.status(200).json({
         success: true

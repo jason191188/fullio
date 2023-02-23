@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const login = (req, res) => {
   const userInfo = userDatabase.select(req.body.user, req.body.pw);
-
-  if(!userInfo){
+  
+  if(!userInfo === req.body.pw){
     res.status(403).json({
       success: false
     });

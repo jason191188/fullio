@@ -1,0 +1,17 @@
+.start {
+    background-color: #5daece;
+    width: 100vw;
+    height: 100%;
+    animation: startWave 0.2s both linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@keyframes startWave {
+    0% {
+
+    }
+    100% {
+        height: 0;
+    }
+}

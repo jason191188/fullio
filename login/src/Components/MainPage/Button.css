@@ -1,0 +1,18 @@
+.wave-btn {
+    background-color: #ffffff;
+    color: #ec132e;
+    background-image: url('../../image/apWave.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100% 100%;
+    background-position-y: 50px;
+    border: 1px solid #ec132e;
+    transition: 0.4s;
+    font-size: 1.6rem;
+}
+
+.wave-btn:hover {
+    color: #ffffff;
+    background-position-y: -1000px;
+    background-size: 1000% 4000%;
+}

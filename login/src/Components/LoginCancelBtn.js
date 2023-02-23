@@ -1,6 +1,6 @@
-import CancelImg from './image/Cancel.png';
-import CancelClear from './image/CancelClear.png';
-import CancelClearRed from './image/CancelRed.png';
+import CancelImg from '../image/Cancel.png';
+import CancelClear from '../image/CancelClear.png';
+import CancelClearRed from '../image/CancelRed.png';
 
 const CancelImage = [CancelClear, CancelImg, CancelClearRed];
 

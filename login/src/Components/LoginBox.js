@@ -5,6 +5,7 @@ import Logo from './Logo';
 import { useState } from 'react';
 import WaveA from './WaveA';
 import './WaveA.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function LoginBox() {
@@ -17,16 +18,11 @@ function LoginBox() {
     const [failLoginPw, setFailLoginPw] = useState('');
     const [classNameWave, setClassNameWave] = useState('');
     const [pageLoad, setPageLoad] = useState('');
-    window.addEventListener('load', (e) => {
-        setPageLoad('page-load');
-    })
-    // const userInfo = [
-    //     {
-    //         name: "merge팀",
-    //         id: "merge",
-    //         pw: "1234",
-    //     },
-    // ];
+    const movePage = useNavigate();
+
+    setTimeout(() => {
+    setPageLoad('page-load');
+    }, 100);
     // let enterKey = '';
     // window.addEventListener('keydown', (e) => {
     //     enterKey = e.key;
@@ -68,25 +64,6 @@ function LoginBox() {
     }
 
     function loginBtn() {
-        // if (textId === userInfo[0].id && textPw === userInfo[0].pw){
-        //     setClassNameWave('login-wave');
-        //     setAlertIdPw('');
-        // } else if (textId === userInfo[0].id && textPw !== userInfo[0].pw){
-        //     setAlertIdPw('비밀번호를 확인해주세요!');
-        //     setFailLoginPw('fail-login');
-        //     setCancelImgMovePw(2);
-        // } else if (textId !== userInfo[0].id && textPw === userInfo[0].pw){
-        //     setAlertIdPw('아이디를 확인해주세요!');
-        //     setFailLoginId('fail-login');
-        //     setCancelImgMoveId(2);
-        // }else {
-        //     setAlertIdPw('아이디/비밀번호를 확인해주세요!');
-        //     setFailLoginId('fail-login');
-        //     setCancelImgMoveId(2);
-        //     setFailLoginPw('fail-login');
-        //     setCancelImgMovePw(2);
-        // }
-        //수정
         fetch("http://43.200.9.209:8000/login", {
           method: "POST",
           headers: {
@@ -101,8 +78,12 @@ function LoginBox() {
           .then((res) => res.json())
           .then((res) => {
             if(res.success){
-              setClassNameWave('login-wave');
-              setAlertIdPw('');
+                setClassNameWave('login-wave');
+                setAlertIdPw('');
+                setTimeout(() => {
+                    movePage('/main');
+                }, 1000);
+
             }else {
               setAlertIdPw('아이디/비밀번호를 확인해주세요!')
               setFailLoginPw('fail-login')
@@ -114,8 +95,7 @@ function LoginBox() {
           .catch((error) => {
             console.error(new Error("로그인 중 에러 발생"));
           });
-      }
-    
+    }
     let pageLoadClass = `login-container ${pageLoad}`;
     return (
         <>

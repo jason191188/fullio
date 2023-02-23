@@ -5,7 +5,7 @@
 .wave-container-A {
     position: relative;
     width: 100vw;
-    height: 150px;
+    height: 15rem;
     border: 1px solid rgba(0, 0, 0, 0);
     overflow: hidden;
     z-index: 100;
@@ -23,7 +23,7 @@
     0% {
     }
     20% {
-        height: 150px;
+        height: 15rem;
         transform: translateY(100px);
     }
     100% {
@@ -33,7 +33,7 @@
 
 .wave-top {
     width: 100vw;
-    height: 100px;
+    height: 10rem;
 }
 .wave-bottom {
     position: relative;
@@ -44,8 +44,8 @@
 .wave-AA {
     position: absolute;
     width: 100vw;
-    height: 100px;
-    background-image: url(./image/pWave.png);
+    height: 10rem;
+    background-image: url(../image/pWave.png);
     background-size: 100% 100%;
     background-repeat: repeat-x;
     animation: waveA 3s both linear;
@@ -63,8 +63,8 @@
 .wave-BB {
     position: absolute;
     width: 100vw;
-    height: 100px;
-    background-image: url(./image/apWave.png);
+    height: 10rem;
+    background-image: url(../image/apWave.png);
     background-size: 100% 100%;
     background-repeat: repeat-x;
     animation: waveB 2s both linear;
@@ -82,8 +82,8 @@
 .wave-CC {
     position: absolute;
     width: 100vw;
-    height: 100px;
-    background-image: url(./image/apWave.png);
+    height: 10rem;
+    background-image: url(../image/apWave.png);
     background-size: 100% 100%;
     background-repeat: repeat-x;
     animation: waveC 3.3s both linear;

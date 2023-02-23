@@ -1,0 +1,40 @@
+.main-container {
+    width: 137.6rem;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.left-container {
+    width: 21.6rem;
+    height: 73.6rem;
+    margin-top: 8.8rem;
+    display: flex;
+    flex-direction: column;
+}
+.cneter-container {
+    width: 79.6rem;
+    height: 73.6rem;
+    display: grid;
+    grid-template-columns: 33.2rem 44.8rem;
+    grid-template-rows: 40.1rem 31.9rem;
+    grid-gap: 1.6rem;
+    margin: 8.8rem 1.6rem 0;
+}
+.right-container {
+    width: 33.2rem;
+    height: inherit;
+    margin-top: 8.8rem;
+}
+
+.log-out-btn {
+    border: 1px solid rgba(0, 0, 0, 0);
+    width: 21.6rem;
+    height: 5.2rem;
+    border-radius: 0.8rem;
+}
+.main-logo-img {
+    transform: translateY(-7.2rem);
+}

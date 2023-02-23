@@ -2,10 +2,10 @@ const userDatabase = require('../../databases/Databases');
 const jwt = require('jsonwebtoken');
 // const { response } = require('../app');
 
-const login = (req, res) => {
-  const userInfo = userDatabase.select(req.body.user, req.body.pw);
+const login = async (req, res) => {
+  const userInfo = await userDatabase.select(req.body.user, req.body.pw);
   
-  if(!userInfo === req.body.pw){
+  if(!userInfo){
     res.status(403).json({
       success: false
     });

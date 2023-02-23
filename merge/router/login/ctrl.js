@@ -1,4 +1,4 @@
-const userDatabase = require('../databases/Databases');
+const userDatabase = require('../../databases/Databases');
 const jwt = require('jsonwebtoken');
 // const { response } = require('../app');
 
@@ -127,6 +127,7 @@ const loginSuccess = (req, res) => {
 const logout = (req, res) => {
   try {
     res.cookie('accessToken', '');
+    res.cookie('refreshToken', '');
     res.status(200).json("Logout Success");
   } catch (error) {
     res.status(500).json(error);

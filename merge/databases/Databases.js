@@ -1,32 +1,17 @@
-module.exports = [
-  {
-    id : 1,
-    user : '22207003',
-    pw : '4184',
-    username : '강지용' 
-  },
-  {
-    id : 2,
-    user : '22207005',
-    pw : '6407',
-    username : '고기훈' 
-  },
-  {
-    id : 3,
-    user : '22207007',
-    pw : '9679',
-    username : '고재영' 
-  },
-  {
-    id : 4,
-    user : '22207045',
-    pw : '7662',
-    username : '오주연' 
-  },
-  {
-    id : 5,
-    user : '22207072',
-    pw : '9050',
-    username : '진승현' 
-  }
-]
+const mysql = require("mysql");
+const cnn = mysql.createConnection({
+    host: 'merge-db.czrk1hm6q3fs.ap-northeast-2.rds.amazonaws.com',
+    user: 'root',
+    password: '22207005',
+    database: 'merge'
+});
+//로그인 정보 읽기
+exports.select = ( memberNumber, password ) => {
+  return new Promise((resolve, reject) => { //promise 안에 있는 구문이 성공을 하면 reserve를 실행, 실패 시 reject를 실행
+    const query = `SELECT * FROM member WHERE memberNumber=${memberNumber} limit 1`;
+    cnn.query(query, [memberNumber], (err, data) => {
+      if(err) reject(`${err}`);
+      resolve(data[0]);
+    });
+  })
+};

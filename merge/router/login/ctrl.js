@@ -3,11 +3,7 @@ const jwt = require('jsonwebtoken');
 // const { response } = require('../app');
 
 const login = (req, res) => {
-  const {user, pw} = req.body;
-
-  const userInfo = userDatabase.filter(item => {
-    return item.user === user && item.pw === pw;
-  })[0];
+  const userInfo = userDatabase.select(req.body.user, req.body.pw);
 
   if(!userInfo){
     res.status(403).json({

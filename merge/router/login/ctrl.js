@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const login = async (req, res) => {
   const userInfo = await userDatabase.select(req.body.user, req.body.pw);
   
-  if(!userInfo){
+  if(userInfo.password !== req.body.pw){
     res.status(403).json({
       success: false
     });

@@ -43,8 +43,9 @@ function Main() {
             </div>
             <div className='cneter-container'>
                 <Calendar></Calendar>
-                <MonthRecord></MonthRecord>
                 <SkillBox></SkillBox>
+                <MonthRecord></MonthRecord>
+                
             </div>
             <div className='right-container'>
                 <UserInfo />

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import COLOR from "./COLOR";
 import BoxShadow from "./StyleComponents";
+import WavePrimary from "../../image/wavePrimary.png";
 const NavContainer =styled.div`
     background-color: ${COLOR.White};
     width: 21.6rem;
@@ -8,7 +9,8 @@ const NavContainer =styled.div`
     border-radius: 0.8rem;
     padding: 2rem 1.6rem;
     ${BoxShadow}
-`
+`;
+const waveButtonPrimary = WavePrimary;
 const Button = styled.button`
     width: 18.4rem;
     height: 5.2rem;
@@ -20,10 +22,17 @@ const Button = styled.button`
     border-radius: 0.8rem;
     font-size: 1.6rem;
     cursor: pointer;
+    background-image: url(${waveButtonPrimary});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition: 0.3s;
+    background-position-y: 5rem;
 
     &:hover {
-        Background-color: ${COLOR.Primary};
         color: ${COLOR.White};
+        background-position-y: -100px;
+        background-size: 400% 400%;
+
     }
     &:nth-child(2) {
         margin: 1.7rem 0;

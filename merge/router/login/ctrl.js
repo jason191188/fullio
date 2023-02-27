@@ -35,11 +35,13 @@ const login = async (req, res) => {
       res.cookie("accessToken",accessToken, {
         secure : false,
         httpOnly : true,
+        domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
         secure : false,
         httpOnly : true,
+        domain: '.fullio.kr'
       });
 
       res.status(200).json({
@@ -101,24 +103,24 @@ const refreshToken = (req, res) => {
   }
 }
 
-const loginSuccess = (req, res) => {
-  try {
-    const token = req.cookies.accessToken;
-    const data = jwt.verify(token, process.env.ACCESS_SECRET);
+// const loginSuccess = (req, res) => {
+//   try {
+//     const token = req.cookies.accessToken;
+//     const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-  const userData = userDatabase.filter(item => {
-    return item.user === data.user;
-  })[0];
+//   const userData = userDatabase.filter(item => {
+//     return item.user === data.user;
+//   })[0];
 
-  res.status(200).json(userData)
+//   res.status(200).json(userData)
 
-  } catch (error) {
-    res.status(500).json(error)
-  }
+//   } catch (error) {
+//     res.status(500).json(error)
+//   }
   
 
 
-}
+// }
 
 const logout = (req, res) => {
   try {
@@ -134,6 +136,6 @@ module.exports = {
   login,
   accessToken,
   refreshToken,
-  loginSuccess,
+  // loginSuccess,
   logout,
 }

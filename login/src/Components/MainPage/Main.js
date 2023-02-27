@@ -15,7 +15,7 @@ function Main() {
     const movePage = useNavigate();
     function clickLogout () {
         alert('로그아웃.');
-        fetch("https://43.200.9.209:8000/logout", {
+        fetch("http://43.200.9.209:8000/logout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -64,38 +64,55 @@ function LoginBox() {
     }
 
     function loginBtn() {
-        fetch("http://43.200.9.209:8000/login", {
+      if(textId.length > 0 && textPw.length > 0) {
+          fetch("http://43.200.9.209:8000/login", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+              "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            user:textId,
-            pw:textPw
+              user:textId,
+              pw:textPw
           }),
           credentials : "include",
-        })
+          })
           .then((res) => res.json())
           .then((res) => {
-            if(res.success){
-                setClassNameWave('login-wave');
-                setAlertIdPw('');
-                setTimeout(() => {
-                    movePage('/main');
-                }, 1000);
+              if(res.success){
+                  setClassNameWave('login-wave');
+                  setAlertIdPw('');
+                  setTimeout(() => {
+                      movePage('/main');
+                  }, 1000);
 
-            }else {
+              }else {
               setAlertIdPw('아이디/비밀번호를 확인해주세요!')
               setFailLoginPw('fail-login')
               setFailLoginId('fail-login')
               setCancelImgMoveId(2)
               setCancelImgMovePw(2)
-            }
+              }
           })
           .catch((error) => {
-            console.error(new Error("로그인 중 에러 발생"));
+              console.error(new Error("로그인 중 에러 발생"));
           });
-    }
+      } else if (textId.length === 0 && textPw.length === 0 ) {
+          setFailLoginPw('fail-login')
+          setFailLoginId('fail-login')
+          setCancelImgMoveId(2)
+          setCancelImgMovePw(2)
+          setAlertIdPw('아이디/비밀번호를 입력해주세요!')
+      } else if (textId.length === 0) {
+          setFailLoginId('fail-login')
+          setCancelImgMoveId(2)
+          setAlertIdPw('아이디를 입력해주세요!')
+      } else {
+          setFailLoginPw('fail-login')
+          setCancelImgMovePw(2)
+          setAlertIdPw('비밀번호를 입력해주세요!')
+      }
+      
+  }
     let pageLoadClass = `login-container ${pageLoad}`;
     return (
         <>

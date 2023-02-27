@@ -35,13 +35,13 @@ const login = async (req, res) => {
       res.cookie("accessToken",accessToken, {
         secure : false,
         httpOnly : true,
-        domain: '.fullio.kr'
+        // domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
         secure : false,
         httpOnly : true,
-        domain: '.fullio.kr'
+        // domain: '.fullio.kr'
       });
 
       res.status(200).json({

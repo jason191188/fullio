@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const login = async (req, res) => {
   const userInfo = await userDatabase.select(req.body.user, req.body.pw);
   
-  if(userInfo.password !== req.body.pw){
+  if(!userInfo || userInfo.password !== req.body.pw){
     res.status(403).json({
       success: false
     });
@@ -33,17 +33,17 @@ const login = async (req, res) => {
 
       //token 전송
       res.cookie("accessToken",accessToken, {
-        sameSite:'none',
-        secure : true,
+        // sameSite:'none',
+        secure : false,
         httpOnly : true,
-        domain: '.fullio.kr'
+        // domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
-        sameSite: 'none',
-        secure : true,
+        // sameSite: 'none',
+        secure : false,
         httpOnly : true,
-        domain: '.fullio.kr'
+        // domain: '.fullio.kr'
       });
 
       res.status(200).json({

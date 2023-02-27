@@ -33,13 +33,15 @@ const login = async (req, res) => {
 
       //token 전송
       res.cookie("accessToken",accessToken, {
-        secure : false,
+        sameSite:'none',
+        secure : true,
         httpOnly : true,
         // domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
-        secure : false,
+        sameSite: 'none',
+        secure : true,
         httpOnly : true,
         // domain: '.fullio.kr'
       });

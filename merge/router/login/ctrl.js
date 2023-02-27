@@ -34,16 +34,14 @@ const login = async (req, res) => {
       //token 전송
       res.cookie("accessToken",accessToken, {
         SameSite:'none',
-        secure : true,
+        secure : false,
         httpOnly : true,
-        // domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
         SameSite: 'none',
-        secure : true,
+        secure : false,
         httpOnly : true,
-        // domain: '.fullio.kr'
       });
 
       res.status(200).json({

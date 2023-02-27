@@ -36,14 +36,14 @@ const login = async (req, res) => {
         sameSite:'none',
         secure : true,
         httpOnly : true,
-        // domain: '.fullio.kr'
+        domain: '.fullio.kr'
       });
 
       res.cookie("refreshToken",refreshToken, {
         sameSite: 'none',
         secure : true,
         httpOnly : true,
-        // domain: '.fullio.kr'
+        domain: '.fullio.kr'
       });
 
       res.status(200).json({

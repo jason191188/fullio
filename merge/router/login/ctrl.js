@@ -13,9 +13,9 @@ const login = async (req, res) => {
     try {
        //access token 발급
        const accessToken = jwt.sign({
-        id : userInfo.id,
-        user : userInfo.user,
-        username : userInfo.username,
+        user : userInfo.memberNumber,
+        userName : userInfo.name,
+        nickname : userInfo.nickname
       }, process.env.ACCESS_SECRET, {
         expiresIn : '5m',
         issuer : 'Fullio', 
@@ -23,9 +23,9 @@ const login = async (req, res) => {
 
       //refresh token 발급
       const refreshToken = jwt.sign({
-        id : userInfo.id,
-        user : userInfo.user,
-        username : userInfo.username,
+        user : userInfo.memberNumber,
+        userName : userInfo.name,
+        nickname : userInfo.nickname
       },  process.env.REFRESH_SECRET, {
         expiresIn : '6h',
         issuer : 'Fullio', 

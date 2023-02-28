@@ -35,13 +35,13 @@ const login = async (req, res) => {
       res.cookie("accessToken",accessToken, {
         SameSite:'none',
         secure : true,
-        httpOnly : true,
+        httpOnly : false,
       });
 
       res.cookie("refreshToken",refreshToken, {
         SameSite: 'none',
         secure : true,
-        httpOnly : true,
+        httpOnly : false,
       });
 
       res.status(200).json({

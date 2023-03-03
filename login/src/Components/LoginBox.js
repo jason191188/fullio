@@ -65,7 +65,7 @@ function LoginBox() {
 
     function loginBtn() {
       if(textId.length > 0 && textPw.length > 0) {
-          fetch("http://43.201.15.119/login", {
+          fetch("http://43.201.15.119:8000/login", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"

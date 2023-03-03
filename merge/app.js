@@ -26,7 +26,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieparser());
 app.use(cors({
-  origin : "http://43.201.15.119:3000", 
+  origin : "http://43.200.205.32:3000", 
   methods : ['GET', 'POST', 'PUT', 'DELETE'],
   credentials : true,
 }));

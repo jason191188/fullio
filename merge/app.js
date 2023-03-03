@@ -2,18 +2,8 @@ const express = require(`express`);
 const dotenv = require('dotenv');
 const cookieparser = require('cookie-parser');
 const cors = require('cors');
-const fs = require('fs');
-const http = require('http');
-const https = require('https');
 
-const privateKey = fs.readFileSync("/etc/letsencrypt/live/www.fullio.kr/privkey.pem");
-const certificate = fs.readFileSync("/etc/letsencrypt/live/www.fullio.kr/cert.pem");
-const ca = fs.readFileSync("/etc/letsencrypt/live/www.fullio.kr/chain.pem");
-const option = {
-  key : privateKey,
-  cert : certificate,
-  ca : ca
-}
+
 const {
   login,
   accessToken,
@@ -36,8 +26,8 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieparser());
 app.use(cors({
-  origin : ["https://43.200.9.209", /\.fullio\.kr$/],
-  methods : ['GET', 'POST'],
+  origin : ["http://43.201.15.119", /\.fullio\.kr$/],
+  methods : ['GET', 'POST', 'PUT', 'DELETE'],
   credentials : true,
 }));
 

@@ -65,7 +65,7 @@ function LoginBox() {
 
     function loginBtn() {
       if(textId.length > 0 && textPw.length > 0) {
-          fetch("https://fullio.kr/login", {
+          fetch("https://43.201.15.119/login", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"

@@ -34,14 +34,14 @@ const login = async (req, res) => {
       //token 전송
       res.cookie("accessToken",accessToken, {
         SameSite:'none',
-        secure : true,
-        httpOnly : false,
+        secure : false,
+        httpOnly : true,
       });
 
       res.cookie("refreshToken",refreshToken, {
         SameSite: 'none',
-        secure : true,
-        httpOnly : false,
+        secure : false,
+        httpOnly : true,
       });
 
       res.status(200).json({

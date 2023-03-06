@@ -19,7 +19,7 @@ function Main() {
     function clickLogout () {
         alert('로그아웃.');
         //url수정 필요
-        fetch("http://3.37.94.31/logout", {
+        fetch("http://fullio.kr:8000/logout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

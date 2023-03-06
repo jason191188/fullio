@@ -1,3 +1,4 @@
+
 import styled, { keyframes } from "styled-components";
 import COLOR from "./COLOR";
 import BoxShadow from "./StyleComponents";
@@ -12,11 +13,13 @@ const MySkillContainer = styled.div`
     grid-row: 3/4;
     padding: 1.6rem;
 `;
+
 const H2 = styled.h2`
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 400;
     margin: 0;
 `;
+
 const GraphContainer = styled.div`
     width: 6.5rem;
     height: 6.5rem;
@@ -26,6 +29,18 @@ const GraphContainer = styled.div`
     margin-bottom: 1.5rem;
 `;
 
+const GraphCircle = styled.circle`
+        fill: transparent;
+        stroke: ${COLOR.Primary};
+        stroke-width: 1.5rem;
+        -webkit-text-stroke-dasharray: 105px;
+        stroke-dasharray: 160;
+        stroke-dashoffset: ${props => props.calcValue};
+        stroke-linecap: round;
+        transform: rotate(-90deg);
+        transform-origin: center center;
+        animation: ${props => props.CircleFrame} 2s both linear;
+    `;
 
 function ProgressCircle ({ value }) {
     const calcValue = (100 - value) * 1.6;
@@ -37,26 +52,13 @@ function ProgressCircle ({ value }) {
             stroke-dashoffset: ${calcValue};
         }
     `
-    const GraphCircle = styled.circle`
-        fill: transparent;
-        stroke: ${COLOR.Primary};
-        stroke-width: 1.2rem;
-        -webkit-text-stroke-dasharray: 105px;
-        stroke-dasharray: 160;
-        stroke-dashoffset: ${calcValue};
-        stroke-linecap: round;
-        transform: rotate(-90deg);
-        transform-origin: center center;
-        animation: ${CircleFrame} 2s both linear;
-    `;
+    
     return(
-        <GraphCircle cx='32.5' cy='32.5' r='26'/>
+        <GraphCircle CircleFrame={CircleFrame} calcValue={calcValue} cx='32.5' cy='32.5' r='26'/>
     )
 }
 
-
-function SkillGraph ({ value, title }) {
-    const ValueG = styled.div`
+const ValueG = styled.div`
         position: absolute;
         top: 50%;
         left: 50%;
@@ -70,10 +72,12 @@ function SkillGraph ({ value, title }) {
         display: flex;
         flex-direction: column;
     `;
+function SkillGraph ({ value, title }) {
+    
     return(
         <Div>
         <GraphContainer>
-            <svg width='65px' height='65px'>
+            <svg viewBox="0 0 65 65">
                 <ProgressCircle value={value}/>
             </svg>
             <ValueG>{value}%</ValueG>
@@ -82,14 +86,13 @@ function SkillGraph ({ value, title }) {
         </Div>
     )
 }
-
-function MySkill() {
-    const Float = styled.div`
+const Float = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         margin-top: 2rem;
     `;
+function MySkill() {
 
     return (
         <MySkillContainer>

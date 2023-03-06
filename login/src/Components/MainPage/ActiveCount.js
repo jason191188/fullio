@@ -25,14 +25,14 @@ const ActiveContainer = styled.div`
     }
 `
 const Count = styled.span`
-    font-size: 34px;
+    font-size: 3.4rem;
     font-weight: bold;
     display: inline-block;
     margin: 1rem 0;
     margin-bottom: 2rem;
 `
 const CountEnd = styled.span`
-    font-size: 24px;
+    font-size: 2.4rem;
 `
 
 function ActiveCount ({ nameTitle, value }) {

@@ -12,6 +12,7 @@
     /* justify-content: center; */
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .info-img {
@@ -53,15 +54,7 @@ span {
     border-radius: 0.8rem;
     text-align: center;
 }
-.strong-container {
-    width: 100%;
-    height: 14.8rem;
-    margin-top: 1.6rem;
-    text-align: center;
-    line-height: 14.8rem;
-    color: #bfbfbf;
-    font-size: 1.4rem;
-}
+
 .chall-container {
     width: 100%;
     height: 22rem;
@@ -70,15 +63,7 @@ span {
     align-items: center;
     flex-direction: column;
 }
-.chall-title {
-    width: 100%;
-    height: 3.3rem;
-    padding: 0.4rem 0.9rem;
-    background-color: #80a391;
-    border-radius: 0.8rem;
-    text-align: center;
-    color: #ffffff;
-}
+
 .chall-img {
     width: 15rem;
     height: 15rem;

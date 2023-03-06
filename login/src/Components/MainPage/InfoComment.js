@@ -1,11 +1,11 @@
-function InfoComment ({ className, value }) {
-    const commentClass = `info-comment-container ${className}`;
+function InfoComment ({ value, onClick}) {
     const commentContent = `"${value}"`;
     return (
-        <div className={commentClass}>
-            {commentContent}
+        <div onClick={onClick} className='info-comment-container'>
+           {commentContent}
         </div>
     )
 }
 
 export default InfoComment;
+

@@ -30,7 +30,7 @@ const Button = styled.button`
 
     &:hover {
         color: ${COLOR.White};
-        background-position-y: -100px;
+        background-position-y: -10rem;
         background-size: 400% 400%;
 
     }

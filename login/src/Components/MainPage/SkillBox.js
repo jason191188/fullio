@@ -13,11 +13,12 @@ const SkillContainer = styled.div`
 `;
 
 function SkillBox() {
+    
     return (
         <SkillContainer>
             <SearchBar></SearchBar>
             <ActiveCount nameTitle='나의 역량' value={27}></ActiveCount>
-            <ActiveCount nameTitle='나의 활동' value={5}></ActiveCount>
+            <ActiveCount nameTitle='나의 활동' value={9}></ActiveCount>
             <ActiveCount nameTitle='나의 기록' value={10}></ActiveCount>
             <MySkill ></MySkill>
         </SkillContainer>

@@ -26,7 +26,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieparser());
 app.use(cors({
-  origin : "http://fullio.kr",  
+  origin : ['http://fullio.kr'],  
   methods : ['GET', 'POST', 'PUT', 'DELETE'],
   credentials : true,
 }));

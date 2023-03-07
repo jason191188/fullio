@@ -15,7 +15,7 @@ const login = async (req, res) => {
        const accessToken = jwt.sign({
         user : userInfo.memberNumber,
         userName : userInfo.name,
-        nickname : userInfo.nickname
+        nickName : userInfo.nickName
       }, process.env.ACCESS_SECRET, {
         expiresIn : '5m',
         issuer : 'Fullio', 
@@ -25,7 +25,7 @@ const login = async (req, res) => {
       const refreshToken = jwt.sign({
         user : userInfo.memberNumber,
         userName : userInfo.name,
-        nickname : userInfo.nickname
+        nickName : userInfo.nickName
       },  process.env.REFRESH_SECRET, {
         expiresIn : '6h',
         issuer : 'Fullio', 
@@ -54,34 +54,39 @@ const login = async (req, res) => {
   }
 }
 
-const accessToken = (req, res) => {
-   try {
-    const token = req.cookies.accessToken;
-    const data = jwt.verify(token, process.env.ACCESS_SECRET);
+const accessToken = async (req, res) => {
+  try {
+   const token = req.cookies.accessToken;
+   const data = jwt.verify(token, process.env.ACCESS_SECRET);
+   const userData = await userDatabase.select(data.user);
+   if(!userData) {
+     res.status(401).send({
+       ok : false
+     });
+   } else {
+     const {pw, ...others} = userData;
 
-    const userData = userDatabase.filter(item => {
-      return item.user === data.user;
-    })[0];
-
-    const {pw, ...others} = userData;
-
-    res.status(200).json(others);
-   } catch (error) {
-    res.status(500).json(error);
-   } 
+     res.status(200).json(others);
+   }
+        
+  } catch (error) {
+   res.status(500).json(error);
+  } 
 }
 
-const refreshToken = (req, res) => {
+const refreshToken = async (req, res) => {
   //access token 갱신
   try {
     const token = req.cookies.refreshToken;
     const data = jwt.verify(token, process.env.REFRESH_SECRET);
 
-    const userData = userDatabase.filter(item => {
-      return item.user === data.user;
-    })[0]
-
-    //access token 재발급
+    const userData = await userDatabase.select(data.user);
+    if(!userData){
+      res.status(401).send({
+        ok : false
+      });
+    } else{
+      //access token 재발급
     const accessToken = jwt.sign({
       id : userData.id,
       user : userData.user,
@@ -98,6 +103,9 @@ const refreshToken = (req, res) => {
 
     res.status(200).json("Access Token Recreated");
 
+    }
+
+    
   } catch (error) {
     res.status(500).json(error);
   }
@@ -124,8 +132,8 @@ const refreshToken = (req, res) => {
 
 const logout = (req, res) => {
   try {
-    res.cookie('accessToken', '');
-    res.cookie('refreshToken', '');
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
     res.status(200).json("Logout Success");
   } catch (error) {
     res.status(500).json(error);

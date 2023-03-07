@@ -18,7 +18,7 @@ function App() {
       setIsLoading(false);
       return;
     }
-    fetch('http://localhost:8000/accesstoken', {
+    fetch('http://fullio.kr:8000/accesstoken', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -26,9 +26,9 @@ function App() {
     })
       .then((response) => {
         if (response.ok) {
-          window.location.href = 'http://localhost:3000/main';
+          window.location.href = 'http://fullio.kr/main';
         } else {
-          fetch('http://localhost:8000/refreshtoken', {
+          fetch('http://fullio.kr:8000/refreshtoken', {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },
@@ -37,7 +37,7 @@ function App() {
             .then((response) => {
               if (response.ok) {
                 // 새로운 access token을 발급받은 경우, 메인 페이지로 리디렉션합니다.
-                window.location.href = 'http://localhost:3000/main';
+                window.location.href = 'http://fullio.kr/main';
               } else {
                 setIsLoading(false);
               }

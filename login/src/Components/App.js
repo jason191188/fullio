@@ -14,10 +14,10 @@ function App() {
   useEffect(() => {
     const accessToken = getCookie('accessToken');
     const refreshToken = getCookie('refreshToken');
-    // if (!accessToken || !refreshToken) {
-    //   setIsLoading(false);
-    //   return;
-    // }
+    if (!accessToken || !refreshToken) {
+      setIsLoading(false);
+      return;
+    }
     fetch('http://fullio.kr:8000/accesstoken', {
       headers: {
         Authorization: `Bearer ${accessToken}`,

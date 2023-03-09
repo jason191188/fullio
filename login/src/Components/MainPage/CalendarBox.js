@@ -293,7 +293,6 @@ function CalendarBox () {
                 days.push(<CalList key={i} value={i} color={COLOR.White}/>)
             }
         }
-        console.log(selectorToggle);
         return days;
     }
 

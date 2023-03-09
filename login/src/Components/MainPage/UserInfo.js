@@ -73,63 +73,135 @@ const NoticeListContainer = styled.div`
     width: 22.1rem;
     height: 3.2rem;
     margin-bottom: 1.8rem;
-    background-color: blue;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 `;
 const NoticeBall = styled.div`
     width: 1.4rem;
     height: 1.4rem;
     border-radius: 999rem;
     display: inline-block;
-    background-color: #5FC59D;
+    background-color: #${props => props.ballColor};
     margin: 0.9rem 0;
     margin-right: 0.7rem;
 `;
-const NoticeCommentBox = styled.div`
-    width: 20rem;
-    height: 3.2rem;
-    vertical-align: top;
-    overflow: hidden;
-`;
-const NoticeType = styled.span`
-    font-size: 1.2rem;
-    color: ${props => props.color};
-`;
+
 const NoticeCommentCon = styled.div`
     width: 20rem;
     height: 3.2rem;
     font-size: 1.2rem;
     line-height: 1.2rem;
-    color: ${props => props.color};
+    color: ${props => props.color? COLOR.GSBF:COLOR.Black};
     display: inline-block;
 `;
-const DateTag = styled.span`
-    font-size: 1rem;
+const DateTag = styled.div`
+    font-size: 0.5rem;
     color: ${COLOR.GSBF};
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    display: inline-block;
 `;
-function UserInfo({ onClick, infoToggle }) {
+const SpanCon = styled.div`
+    height: 3.2rem;
+    display: inline-block;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    white-space: pre-line;
+`;
+function UserInfo({ onClick, infoToggle, strength}) {
     const [noticeToggle, setNoticeToggle] = useState(false);
     const NoticeImage = NoticeImg;
     const movePage = useNavigate();
+    const noticeArray =[
+        {
+            noticeType: '기록',
+            noticeContent: '이번 주에 있었던 활동을 기록해 보세요.',
+            date: '오늘',//date는 마지막 등록날짜를 넣어주세요.
+            id: 1,
+            checked: false,
+        },
+        {
+            noticeType: '일정',
+            noticeContent: '신규 일정  \'특강\'이/가 등록되었어요.',
+            date: '오늘',
+            id: 2,
+            checked: false,
+        },
+        {
+            noticeType: '일정',
+            noticeContent: '이번 주에 있었던 활동을 기록해 보세요.',
+            date: '어제',
+            id: 3,
+            checked: true,
+        },
+        {
+            noticeType: '챌린지',
+            noticeContent: '순위 변동! 바로 확인해 보세요.',
+            date: '그저께',
+            id: 4,
+            checked: true,
+        },
+        {
+            noticeType: '기록',
+            noticeContent: '\'김윤석 매니저\'님이 기록을 확인했어요.',
+            date: '2월 19일',
+            id: 5,
+            checked: true,
+        },
+        {
+            noticeType: '기록',
+            noticeContent: '\'김윤석 매니저\'님이 댓글을 달았어요.',
+            date: '2월 19일',
+            id: 6,
+            checked: true,
+        },
+    ];
+    
+
     
     function NoticeClick () {
         setNoticeToggle(!noticeToggle);
+        // if(noticeToggle) {
+        //     fetch("http://43.200.205.32:8000/notice", {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         credentials : "include",
+        //     })
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setNoticeArray(res);
+        //     })
+        //     .catch((error) => {
+        //         console.error(new Error("알림을 불러오지 못함"));
+        //     })
+        // }
     }
-    function NoticeListBox() {
+    function NoticeListBox({ nType, nContent, date, checked }) {
+        let ballColor = '';
+        if(nType === '일정') {
+            ballColor = '5FC59D';
+        } else if (nType === '챌린지') {
+            ballColor = 'FCCB05';
+        } else if (nType === '기록') {
+            ballColor = '81AAE8';
+        }
         return (
             <NoticeListContainer>
-                <NoticeBall />
-                <NoticeCommentBox>
-                    <NoticeType color={'black'}>[알림]</NoticeType>
-                    <NoticeCommentCon color={'black'}>이번 주에 있었던 활동을 기록해보세요.</NoticeCommentCon>
-                    <DateTag> 오늘</DateTag>
-                </NoticeCommentBox>
+                <NoticeBall ballColor={ballColor}/>
+                    <NoticeCommentCon color={checked}>
+                        <SpanCon>
+                            [{nType}] {nContent}
+                            <DateTag>{date}</DateTag>
+                        </SpanCon>
+                    </NoticeCommentCon>
             </NoticeListContainer>
         )
     }
+
     function NoticeBox () {
+        
         return (
             <NoticeBoxContainer>
                 <NoticeTitleCon>
@@ -137,12 +209,16 @@ function UserInfo({ onClick, infoToggle }) {
                     <NoticeAll>모두읽음</NoticeAll>
                 </NoticeTitleCon>
                 <NoticeMainCon>
-                    <NoticeListBox />
-                    <NoticeListBox />
-                    <NoticeListBox />
-                    <NoticeListBox />
-                    <NoticeListBox />
-                    <NoticeListBox />
+                    {noticeArray.map((item) => {
+                        return (
+                            <NoticeListBox 
+                            key={item.id}
+                            nType={item.noticeType} 
+                            nContent={item.noticeContent} 
+                            date={item.date}
+                            checked={item.checked}/>
+                        )
+                    })}
                 </NoticeMainCon>
             </NoticeBoxContainer>
         )
@@ -162,16 +238,24 @@ function UserInfo({ onClick, infoToggle }) {
         <div className="userinfo-container container">
             {noticeToggle ? <NoticeBox/> : null}
             <Notice onClick={NoticeClick}/>
-            {true ? <RedDot onClick={NoticeClick}/> : null}
+            {true ?<RedDot onClick={NoticeClick}/> : null}
             <img src={userInfoImg} className='info-img' alt='프로필 사진' />
             <span>{userInfoName}</span>
             <span className='info-email'>{userInfoEmail}</span>
-            <Button value={'마이페이지'} className={'infoMypage'} onClick={moveMypage}/>
-            {infoToggle ? <InfoComment value={'변경됨'} onClick={onClick}/> : <InfoComment value={'호락호락'} onClick={onClick}/>}
-            <StrongTest />
+            <Button 
+                value={'마이페이지'} 
+                className={'infoMypage'} 
+                onClick={moveMypage}
+            />
+            {infoToggle ?
+                <InfoComment value={'변경됨'} onClick={onClick}/> 
+                : <InfoComment value={'호락호락'} onClick={onClick}/>
+             }
+            <StrongTest strength={strength}/>
             <Challenge value={'Zzz'}/>
         </div>
     );
 }
 
 export default UserInfo;
+

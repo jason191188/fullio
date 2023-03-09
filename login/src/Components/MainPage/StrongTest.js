@@ -58,14 +58,12 @@ function StrongItems ({ value, count }) {
 }
 
 
-function StrongTest () {
+function StrongTest ({ strength }) {
     return (
         <StrongContainer>
-            <StrongItems value={'적응(Adaptability)'} count={1} ></StrongItems>
-            <StrongItems value={'적응(Adaptability)'} count={2} ></StrongItems>
-            <StrongItems value={'적응(Adaptability)'} count={3} ></StrongItems>
-            <StrongItems value={'적응(Adaptability)'} count={4} ></StrongItems>
-            <StrongItems value={'적응(Adaptability)'} count={5} ></StrongItems>
+            {strength.map((item) => {
+                return <StrongItems key={item.key} value={item.title} count={item.count} ></StrongItems>
+            })}
         </StrongContainer>
     )
 }

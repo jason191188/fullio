@@ -28,7 +28,19 @@ const GraphContainer = styled.div`
     margin: 0 auto;
     margin-bottom: 1.5rem;
 `;
-
+const GraphCircleBack = styled.circle`
+        position: absolute;
+        fill: transparent;
+        stroke: ${COLOR.GSF0};
+        stroke-width: 1.5rem;
+        -webkit-text-stroke-dasharray: 105px;
+        stroke-dasharray: 160;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        transform: rotate(-90deg);
+        transform-origin: center center;
+        z-index: 9;
+`;
 const GraphCircle = styled.circle`
         fill: transparent;
         stroke: ${COLOR.Primary};
@@ -40,7 +52,8 @@ const GraphCircle = styled.circle`
         transform: rotate(-90deg);
         transform-origin: center center;
         animation: ${props => props.CircleFrame} 2s both linear;
-    `;
+        z-index: 10
+`;
 
 function ProgressCircle ({ value }) {
     const calcValue = (100 - value) * 1.6;
@@ -54,7 +67,13 @@ function ProgressCircle ({ value }) {
     `
     
     return(
-        <GraphCircle CircleFrame={CircleFrame} calcValue={calcValue} cx='32.5' cy='32.5' r='26'/>
+        <>
+            <GraphCircleBack cx='32.5' cy='32.5' r='26'/>  
+            <GraphCircle 
+                CircleFrame={CircleFrame} 
+                calcValue={calcValue} cx='32.5' cy='32.5' r='26'
+            />
+        </>
     )
 }
 

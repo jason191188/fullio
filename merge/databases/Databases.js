@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const cnn = mysql.createConnection({
-    host: 'merge-db.czrk1hm6q3fs.ap-northeast-2.rds.amazonaws.com',
+    host: '127.0.0.1',
     user: 'root',
     password: '22207005',
     database: 'merge'

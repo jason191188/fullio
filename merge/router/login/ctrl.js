@@ -1,21 +1,12 @@
 const userDatabase = require('../../databases/Databases');
 const jwt = require('jsonwebtoken');
-// const { response } = require('../app');
-const userInfo = [{
-  password: '1111',
-  name: '진승현',
-  nickname: '슈발자',
-  memberNumber: 22207072,
-  pw:'1111',
-  user: 22207072,
-},];
+
 
 const login = async (req, res) => {
   
-  if(userInfo[0].password !== req.body[0].pw){
-    res.status(403).json({
-      success: false,
-    });
+
+  if(!userInfo || userInfo.password !== req.body.pw){
+    res.status(403);
   }else{
     try {
        //access token 발급
@@ -61,20 +52,24 @@ const login = async (req, res) => {
   }
 }
 
-const accessToken = (req, res) => {
-   try {
-    const token = req.cookies.accessToken;
-    const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-    const userData = userInfo.filter(item => {
-      return item.memberNumber === data.user;
-    });
-    const {pw, ...others} = userData;
+const accessToken = async (req, res) => {
+  try {
+   const token = req.cookies.accessToken;
+   const data = jwt.verify(token, process.env.ACCESS_SECRET);
+   const userData = await userDatabase.select(data.user);
+   if(!userData) {
+     res.status(401);
+   } else {
+     const {pw, ...others} = userData;
 
-    res.status(200).json(others);
-   } catch (error) {
-    res.status(500).json(error);
-   } 
+     res.status(200).json(others);
+   }
+        
+  } catch (error) {
+   res.status(500);
+  } 
+
 }
 
 const refreshToken = (req, res) => {
@@ -83,11 +78,12 @@ const refreshToken = (req, res) => {
     const token = req.cookies.refreshToken;
     const data = jwt.verify(token, process.env.REFRESH_SECRET);
 
-    const userData = userInfo.filter(item => {
-      return item.memberNumber === data.user;
-    })[0]
 
-    //access token 재발급
+    const userData = await userDatabase.select(data.user);
+    if(!userData){
+      res.status(401);
+    } else{
+      //access token 재발급
     const accessToken = jwt.sign({
       id : userData.id,
       user : userData.user,
@@ -102,39 +98,20 @@ const refreshToken = (req, res) => {
       httpOnly : true,
     });
 
-    res.status(200).json("Access Token Recreated");
+    res.status(200);
 
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500);
   }
 }
 
-// const loginSuccess = (req, res) => {
-//   try {
-//     const token = req.cookies.accessToken;
-//     const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
-//   const userData = userDatabase.filter(item => {
-//     return item.user === data.user;
-//   })[0];
-
-//   res.status(200).json(userData)
-
-//   } catch (error) {
-//     res.status(500).json(error)
-//   }
-  
-
-
-// }
-
 const logout = (req, res) => {
   try {
-    res.cookie('accessToken', '');
-    res.cookie('refreshToken', '');
-    res.status(200).json("Logout Success");
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    res.status(200)
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500);
   }
 };
 
@@ -142,6 +119,5 @@ module.exports = {
   login,
   accessToken,
   refreshToken,
-  // loginSuccess,
   logout,
 }

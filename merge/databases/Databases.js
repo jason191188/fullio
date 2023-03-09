@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const cnn = mysql.createConnection({
-    host: 'merge-db.czrk1hm6q3fs.ap-northeast-2.rds.amazonaws.com',
+    host: '127.0.0.1',
     user: 'root',
     password: '22207005',
     database: 'merge'
@@ -15,6 +15,7 @@ exports.select = ( memberNumber, password ) => {
     });
   })
 };
+
 
 //member 테이블에서 nickName, phoneNumber, email, motto, profil_path 값이 들어올 경우 UPDATE 실행
 exports.updateMember = (memberNumber, updateData) => {

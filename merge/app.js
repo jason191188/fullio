@@ -8,7 +8,6 @@ const {
   login,
   accessToken,
   refreshToken,
-  // loginSuccess,
   logout,
 } = require('./router/login/ctrl');
 
@@ -35,7 +34,6 @@ app.use(cors({
 app.post('/login', login);
 app.get('/accesstoken', accessToken);
 app.get('/refreshtoken', refreshToken);
-// app.get('/login/success', loginSuccess);
 app.post('/logout', logout);
 
 //메인페이지 컨트롤러

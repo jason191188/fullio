@@ -1,14 +1,11 @@
 const userDatabase = require('../../databases/Databases');
 const jwt = require('jsonwebtoken');
-// const { response } = require('../app');
 
 const login = async (req, res) => {
   const userInfo = await userDatabase.select(req.body.user, req.body.pw);
   
   if(!userInfo || userInfo.password !== req.body.pw){
-    res.status(403).json({
-      success: false
-    });
+    res.status(403);
   }else{
     try {
        //access token 발급
@@ -60,9 +57,7 @@ const accessToken = async (req, res) => {
    const data = jwt.verify(token, process.env.ACCESS_SECRET);
    const userData = await userDatabase.select(data.user);
    if(!userData) {
-     res.status(401).send({
-       ok : false
-     });
+     res.status(401);
    } else {
      const {pw, ...others} = userData;
 
@@ -70,7 +65,7 @@ const accessToken = async (req, res) => {
    }
         
   } catch (error) {
-   res.status(500).json(error);
+   res.status(500);
   } 
 }
 
@@ -82,9 +77,7 @@ const refreshToken = async (req, res) => {
 
     const userData = await userDatabase.select(data.user);
     if(!userData){
-      res.status(401).send({
-        ok : false
-      });
+      res.status(401);
     } else{
       //access token 재발급
     const accessToken = jwt.sign({
@@ -101,42 +94,23 @@ const refreshToken = async (req, res) => {
       httpOnly : true,
     });
 
-    res.status(200).json("Access Token Recreated");
+    res.status(200);
 
     }
 
     
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500);
   }
 }
-
-// const loginSuccess = (req, res) => {
-//   try {
-//     const token = req.cookies.accessToken;
-//     const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
-//   const userData = userDatabase.filter(item => {
-//     return item.user === data.user;
-//   })[0];
-
-//   res.status(200).json(userData)
-
-//   } catch (error) {
-//     res.status(500).json(error)
-//   }
-  
-
-
-// }
 
 const logout = (req, res) => {
   try {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
-    res.status(200).json("Logout Success");
+    res.status(200)
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500);
   }
 };
 
@@ -144,6 +118,5 @@ module.exports = {
   login,
   accessToken,
   refreshToken,
-  // loginSuccess,
   logout,
 }
